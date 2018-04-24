@@ -1,6 +1,6 @@
 {
 	"name": "new-years-functions",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"license": "MIT",
 	"dockerHubRepository": "haydenbr/new-years-functions",
 	"scripts": {
