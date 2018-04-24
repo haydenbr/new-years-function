@@ -25,7 +25,10 @@ function methodNotAllowed(req) {
 function getNewResponse(body, status) {
 	return Object.assign(
 		{
-			headers: { 'Content-Type': 'application/json' },
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin' : '*'
+			},
 			status,
 		},
 		{ body }
