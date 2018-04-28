@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const chalk = require('chalk');
-const copyDependencies = require('./copy-dependencies');
 const dockerUtil = require('./docker-utilities');
 const gitUtil = require('./git-utilities');
 const syncComposeImage = require('./docker-compose-image-version').syncComposeImage;
