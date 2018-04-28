@@ -1,6 +1,6 @@
 {
   "name": "hello",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
   "description": "example Azure function with GET and POST handlers",

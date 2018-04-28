@@ -1,6 +1,6 @@
 {
 	"disabled": false,
-	"scriptFile": "src/index.js",
+	"scriptFile": "index.js",
 	"bindings": [
 		{
 			"authLevel": "anonymous",

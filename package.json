@@ -1,10 +1,11 @@
 {
 	"name": "new-years-functions",
-	"version": "0.0.1",
+	"version": "0.0.0",
 	"license": "MIT",
 	"dockerHubRepository": "haydenbr/new-years-functions",
 	"scripts": {
-		"start": "docker-compose up",
+		"start": "docker-compose -f ./docker-compose.dev.yml up",
+    "down": "docker-compose -f ./docker-compose.dev.yml down",
 		"precommit": "pretty-quick --staged"
 	},
 	"devDependencies": {
