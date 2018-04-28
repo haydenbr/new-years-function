@@ -4,8 +4,8 @@
     "license": "MIT",
     "dockerHubRepository": "haydenbr/new-years-functions",
     "scripts": {
-        "start": "docker-compose -f ./docker-compose.dev.yml up",
-        "down": "docker-compose -f ./docker-compose.dev.yml down",
+        "start": "docker-compose -f ../docker-compose.dev.yml -f ./docker-compose.dev.yml up",
+        "down": "docker-compose -f ../docker-compose.dev.yml -f ./docker-compose.dev.yml down",
         "bump": "./scripts/bump.js",
         "docker-build": "docker build -t $(./scripts/current-tag.js) .",
         "docker-push": "docker push $(./scripts/current-tag.js)",
