@@ -1,16 +1,18 @@
 #!/usr/bin/env node
 
 const chalk = require('chalk');
-const gitUtil = require('./git-utilities');
-const syncDockerComposeImageVersion = require('./sync-docker-compose-image-version');
-const util = require('./script-util');
+const copyDependencies = require('./copy-dependencies');
 const dockerUtil = require('./docker-utilities');
+const gitUtil = require('./git-utilities');
+const syncComposeImage = require('./docker-compose-image-version').syncComposeImage;
+const util = require('./script-utilities');
 
 const versionBump = process.argv[2];
+bump(versionBump);
 
-function bump() {
+function bump(versionBump) {
 	return bumpVersion(versionBump)
-		.then(() => syncDockerComposeImageVersion())
+		.then(() => syncVersionNumbers())
 		.then(() => commitAndTag())
 		.then(() => dockerize())
 		.then(() => gitPush())
@@ -32,6 +34,7 @@ function bumpVersion(versionBump) {
 
 function commitAndTag() {
 	let version = util.getCurrentVersion();
+
 	return gitUtil.commit(version).then(() => gitUtil.tag(version));
 }
 
@@ -41,7 +44,14 @@ function dockerize() {
 
 function gitPush() {
 	let tag = util.getCurrentVersion();
+
 	return gitUtil.push().then(() => gitUtil.pushTag(tag));
 }
 
-bump();
+function shouldBump() {}
+
+function syncVersionNumbers() {
+	return Promise.all([
+		syncComposeImage()
+	]);
+}

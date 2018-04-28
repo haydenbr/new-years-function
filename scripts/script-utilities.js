@@ -1,10 +1,7 @@
 const childProcess = require('child_process');
 const fs = require('fs');
 const path = require('path');
-
 const yaml = require('js-yaml');
-
-// Just a few functions that are common to mutliple build scripts
 
 function bumpVersion(versionBump) {
 	let newVersion = getNextVersion(versionBump);
@@ -33,6 +30,14 @@ function getCurrentVersion() {
 	return getPackageJson().version;
 }
 
+function getDockerHubRepository() {
+	return getPackageJson().dockerHubRepository;
+}
+
+function getCurrentDockerImage() {
+	return `${getDockerHubRepository()}:${getCurrentVersion()}-dev`;
+}
+
 function getNextVersion(versionBump) {
 	let versionBumpOptions = ['major', 'minor', 'patch'];
 
@@ -52,10 +57,6 @@ function getNextVersion(versionBump) {
 	}[versionBump];
 }
 
-function getDockerHubRepository() {
-	return getPackageJson().dockerHubRepository;
-}
-
 function getPackageJson() {
 	return require(path.resolve(__dirname, '..', 'package.json'));
 }
@@ -63,6 +64,12 @@ function getPackageJson() {
 function readFile(filepath) {
 	return new Promise((resolve, reject) => {
 		fs.readFile(filepath, (err, data) => (err ? reject(err) : resolve(data)));
+	});
+}
+
+function rename(oldPath, newPath) {
+	return new Promise((resolve, reject) => {
+		fs.rename(oldPath, newPath, (err, data) => (err ? reject(err) : resolve(data)));
 	});
 }
 
@@ -79,7 +86,7 @@ function spawnPromise(command, args) {
 
 function writeFile(filepath, data) {
 	return new Promise((resolve, reject) => {
-		fs.writeFile(filepath, data, { flag: 'w' }, (err, data) => (err ? reject(err) : resolve(data)));
+		fs.writeFile(filepath, data, (err, data) => (err ? reject(err) : resolve(data)));
 	});
 }
 
@@ -89,10 +96,12 @@ module.exports = {
 	convertYamlToJson,
 	execFile,
 	getCurrentVersion,
+	getCurrentDockerImage,
 	getDockerHubRepository,
 	getNextVersion,
 	getPackageJson,
 	readFile,
+	rename,
 	spawnPromise,
-	writeFile,
+	writeFile
 };

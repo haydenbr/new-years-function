@@ -1,5 +1,5 @@
 const childProcess = require('child_process');
-const util = require('./script-util');
+const util = require('./script-utilities');
 
 function commit(message) {
 	return util.execFile('git', ['commit', '-a', '-m', message]);
