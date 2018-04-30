@@ -2,7 +2,7 @@ version: '3.6'
 services:
   new-years-functions:
     container_name: new-years-functions
-    image: 'haydenbr/new-years-functions:0.0.1-dev'
+    image: 'haydenbr/new-years-functions:0.0.2-dev'
     volumes:
       - './new-years-functions/common/src:/home/site/wwwroot/common/src'
       - './new-years-functions/hello/src:/home/site/wwwroot/hello/src'
