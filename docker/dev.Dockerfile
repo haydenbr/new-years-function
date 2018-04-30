@@ -1,4 +1,6 @@
 FROM microsoft/azure-functions-runtime:2.0.0-jessie
+
+LABEL maintainer="haydenbr"
 ENV AzureWebJobsScriptRoot=/home/site/wwwroot
 
 WORKDIR /home/site/wwwroot
